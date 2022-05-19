@@ -14,13 +14,15 @@
             <div class="no-overlay-panel">
                 <h1 id="welcome_description">Welcome back! This is home</h1>
                 <p>To log out please hit below!!</p>
-                <button>Logout</button>
+                <button onclick="signOut()">Logout</button>
             </div>
         </div>
     </div>
 </div>
 <script>
     const pageName = "account";
+    const signOutButton = document.getElementById('signOut');
+
 </script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>

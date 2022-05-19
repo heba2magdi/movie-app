@@ -31,7 +31,7 @@ function checkIfLoggedIn() {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
         if (pageName === "index") {
-            // location.href = "account.html"
+            location.href = "account.html"
             console.log("user logged in - index");
         }
 
@@ -47,11 +47,28 @@ function checkIfLoggedIn() {
     } else {
         // No user is signed in.
         if (pageName === "account") {
-            //  location.href = "index.html"
+            location.href = "index.html"
             console.log("user isn't logged in - account");
         }
     }
 
+}
+
+function signOut() {
+    firebase.auth().signOut().then(() => {
+        // Sign-out successful.
+        goToRegistration();
+    }).catch((error) => {
+        // An error happened.
+    });
+}
+
+function goToHome() {
+    location.href = "account.html"
+}
+
+function goToRegistration() {
+    location.href = "index.html"
 }
 
 function loginSubmit() {
@@ -64,7 +81,7 @@ function loginSubmit() {
             const user = userCredential.user;
             firebase.auth().currentUser = userCredential.user;
             console.log(user);
-            location.href = "account.html"
+            goToHome();
         })
         .catch((error) => {
             const errorCode = error.code;

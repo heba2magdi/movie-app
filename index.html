@@ -46,7 +46,7 @@
             <span>or use your account</span>
             <input id="login_email" type="email" placeholder="Email"/>
             <input id="login_password" type="password" placeholder="Password"/>
-            <a href="#">Forgot your password?</a>
+            <a onclick="sendResetEmail()">Forgot your password?</a>
             <button onclick="loginSubmit()">Sign In</button>
         </div>
     </div>
@@ -70,6 +70,7 @@
 
     const signUpButton = document.getElementById('signUp');
     const signInButton = document.getElementById('signIn');
+
 
 
     signUpButton.addEventListener('click', () => {
