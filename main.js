@@ -34,7 +34,27 @@ function checkIfLoggedIn() {
             location.href = "account.html"
             console.log("user logged in - index");
         }
+        function loginSubmit() {
+            const email = document.getElementById('login_email').value;
+            const password = document.getElementById('login_password').value;
 
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user;
+                    firebase.auth().currentUser = userCredential.user;
+                    console.log(user);
+                    goToHome();
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+
+                    console.log("errorCode: " + errorCode);
+                    console.log("errorMessage: " + errorMessage);
+                });
+
+        }
         displayName = user.displayName;
         email = user.email;
         photoURL = user.photoURL;
@@ -42,7 +62,8 @@ function checkIfLoggedIn() {
         uid = user.uid;
 
         //document.getElementById('welcome_message').innerText = "Welcome back " + displayName + ", this is your account";
-        document.getElementById('welcome_description').innerText = "Welcome back " + displayName + ", this is your account";
+        // document.getElementById('welcome_description').innerText = "Welcome back " + displayName + ", this is your account";
+        document.getElementById('welcome_description').innerText = "Welcome back " + ", this is your account";
 
     } else {
         // No user is signed in.
@@ -71,30 +92,13 @@ function goToRegistration() {
     location.href = "index.html"
 }
 
-function loginSubmit() {
-    const email = document.getElementById('login_email').value;
-    const password = document.getElementById('login_password').value;
 
-    firebase.auth().signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-            // Signed in
-            const user = userCredential.user;
-            firebase.auth().currentUser = userCredential.user;
-            console.log(user);
-            goToHome();
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
 
-            console.log("errorCode: " + errorCode);
-            console.log("errorMessage: " + errorMessage);
-        });
 
-}
 
 function sendResetEmail() {
-    firebase.auth().sendPasswordResetEmail(email)
+
+    firebase.auth().sendPasswordResetEmail(login_email)
         .then(() => {
             // Password reset email sent!
             // ..
