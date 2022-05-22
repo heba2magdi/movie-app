@@ -86,7 +86,7 @@ function loginSubmit() {
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-
+            alert(errorCode + ": " + errorMessage);
             console.log("errorCode: " + errorCode);
             console.log("errorMessage: " + errorMessage);
         });
@@ -94,15 +94,21 @@ function loginSubmit() {
 }
 
 function sendResetEmail() {
+    const email = document.getElementById('login_email').value;
+
+    if (email === "") {
+        alert("Please, make sure to write down a valid email in the login email box.");
+        return;
+    }
+
     firebase.auth().sendPasswordResetEmail(email)
         .then(() => {
-            // Password reset email sent!
-            // ..
+            alert("We sent an email to your email address to reset your password");
         })
         .catch((error) => {
             var errorCode = error.code;
             var errorMessage = error.message;
-            // ..
+            alert(errorCode + ": " + errorMessage);
         });
 }
 
